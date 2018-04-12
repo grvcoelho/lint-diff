@@ -1,0 +1,25 @@
+{
+  "name": "difflint",
+  "version": "0.1.0",
+  "description": ":nail_care: Run eslint only in the changed parts of the code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grvcoelho/difflint.git"
+  },
+  "keywords": [
+    "linter",
+    "eslint",
+    "diff",
+    "git"
+  ],
+  "author": "Guilherme Coelho <guilhermervcoelho@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/grvcoelho/difflint/issues"
+  },
+  "homepage": "https://github.com/grvcoelho/difflint#readme"
+}
