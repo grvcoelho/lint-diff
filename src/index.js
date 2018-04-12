@@ -1,9 +1,11 @@
 import Promise from 'bluebird'
 import exec from 'execa'
+import program from 'commander'
 import path from 'path'
 import { CLIEngine } from 'eslint'
 import {
   assoc,
+  curry,
   endsWith,
   evolve,
   filter,
@@ -20,25 +22,26 @@ import { getChangedLinesFromDiff } from './lib/git'
 
 const linter = new CLIEngine()
 const formatter = linter.getFormatter()
-const COMMIT_RANGE = 'HEAD^..HEAD'
-
-const getDiff = filename => exec('git', ['diff', COMMIT_RANGE, filename])
-  .then(prop('stdout'))
 
 const getChangedFiles = pipeP(
-  () => exec('git', ['diff', COMMIT_RANGE, '--name-only']),
+  commitRange => exec('git', ['diff', commitRange, '--name-only']),
   prop('stdout'),
   split('\n'),
   filter(endsWith('.js')),
   map(path.resolve)
 )
 
-const getChangedFileLineMap = filePath => pipeP(
-  getDiff,
+const getDiff = curry((commitRange, filename) =>
+  exec('git', ['diff', commitRange, filename])
+    .then(prop('stdout')))
+
+const getChangedFileLineMap = curry((commitRange, filePath) => pipeP(
+  getDiff(commitRange),
   getChangedLinesFromDiff,
   objOf('changedLines'),
   assoc('filePath', filePath)
-)(filePath)
+)(filePath))
+
 
 const lintChangedLines = pipe(
   map(prop('filePath')),
@@ -74,11 +77,15 @@ const reportResults = pipe(
   formatter
 )
 
-const run = () => Promise.resolve()
+const run = commitRange => Promise.resolve(commitRange)
   .then(getChangedFiles)
-  .map(getChangedFileLineMap)
+  .map(getChangedFileLineMap(commitRange))
   .then(applyLinter)
   .then(reportResults)
   .tap(console.log)
 
-run()
+program
+  .command('lint <commit_range>')
+  .action(run)
+
+program.parse(process.argv)
