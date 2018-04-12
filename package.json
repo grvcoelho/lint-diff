@@ -33,8 +33,10 @@
   },
   "dependencies": {
     "bluebird": "^3.5.1",
-    "eslint": "^4.19.1",
     "execa": "^0.10.0",
     "ramda": "^0.25.0"
+  },
+  "peerDependencies": {
+    "eslint": "4.x"
   }
 }
