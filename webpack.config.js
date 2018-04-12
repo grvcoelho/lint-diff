@@ -1,4 +1,5 @@
 const path = require('path')
+const { BannerPlugin } = require('webpack')
 const externals = require('webpack-node-externals')
 
 const config = {
@@ -23,6 +24,12 @@ const config = {
       },
     ],
   },
+  plugins: [
+    new BannerPlugin({
+      banner: '#!/usr/bin/env node',
+      raw: true,
+    }),
+  ]
 }
 
 module.exports = config
