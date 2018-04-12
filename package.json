@@ -4,6 +4,7 @@
   "description": ":nail_care: Run eslint only in the changed parts of the code",
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,5 +22,9 @@
   "bugs": {
     "url": "https://github.com/grvcoelho/difflint/issues"
   },
-  "homepage": "https://github.com/grvcoelho/difflint#readme"
+  "homepage": "https://github.com/grvcoelho/difflint#readme",
+  "devDependencies": {
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14"
+  }
 }
