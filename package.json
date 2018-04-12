@@ -2,7 +2,8 @@
   "name": "difflint",
   "version": "0.1.0",
   "description": ":nail_care: Run eslint only in the changed parts of the code",
-  "main": "index.js",
+  "main": "dist/difflint.js",
+  "bin": "dist/difflint.js",
   "scripts": {
     "build": "webpack",
     "lint": "eslint 'src/**/*.js'",
