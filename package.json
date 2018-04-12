@@ -29,5 +29,11 @@
     "babel-plugin-ramda": "^1.6.1",
     "webpack": "^4.5.0",
     "webpack-cli": "^2.0.14"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "eslint": "^4.19.1",
+    "execa": "^0.10.0",
+    "ramda": "^0.25.0"
   }
 }
