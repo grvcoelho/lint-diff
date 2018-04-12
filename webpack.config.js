@@ -12,6 +12,15 @@ const config = {
   devtool: 'source-map',
   target: 'node',
   mode: 'production',
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: 'babel-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
 }
 
 module.exports = config
