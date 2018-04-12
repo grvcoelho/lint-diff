@@ -1,6 +1,6 @@
 {
   "name": "difflint",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": ":nail_care: Run eslint only in the changed parts of the code",
   "main": "./dist/difflint.js",
   "bin": "./dist/difflint.js",
