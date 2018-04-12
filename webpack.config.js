@@ -1,4 +1,5 @@
 const path = require('path')
+const externals = require('webpack-node-externals')
 
 const config = {
   context: path.join(__dirname, './src'),
@@ -11,7 +12,8 @@ const config = {
   },
   devtool: 'source-map',
   target: 'node',
-  mode: 'production',
+  externals: [externals()],
+  mode: 'development',
   module: {
     rules: [
       {
