@@ -1,9 +1,9 @@
 {
-  "name": "difflint",
+  "name": "lintdiff",
   "version": "0.3.0",
   "description": ":nail_care: Run eslint only in the changed parts of the code",
-  "main": "./dist/difflint.js",
-  "bin": "./dist/difflint.js",
+  "main": "./dist/lintdiff.js",
+  "bin": "./dist/lintdiff.js",
   "scripts": {
     "build": "webpack",
     "lint": "eslint 'src/**/*.js'",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/grvcoelho/difflint.git"
+    "url": "git+https://github.com/grvcoelho/lintdiff.git"
   },
   "keywords": [
     "linter",
@@ -23,9 +23,9 @@
   "author": "Guilherme Coelho <guilhermervcoelho@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/grvcoelho/difflint/issues"
+    "url": "https://github.com/grvcoelho/lintdiff/issues"
   },
-  "homepage": "https://github.com/grvcoelho/difflint#readme",
+  "homepage": "https://github.com/grvcoelho/lintdiff#readme",
   "devDependencies": {
     "babel-loader": "^7.1.4",
     "babel-plugin-add-module-exports": "^0.2.1",

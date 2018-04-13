@@ -8,8 +8,8 @@ const config = {
   output: {
     path: path.join(__dirname, './dist'),
     libraryTarget: 'commonjs2',
-    filename: 'difflint.js',
-    sourceMapFilename: 'difflint.js.map',
+    filename: 'lintdiff.js',
+    sourceMapFilename: 'lintdiff.js.map',
   },
   devtool: 'source-map',
   target: 'node',
