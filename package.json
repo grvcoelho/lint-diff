@@ -1,6 +1,6 @@
 {
   "name": "@grvcoelho/lint-diff",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": ":nail_care: Run eslint only in the changed parts of the code",
   "main": "./dist/lint-diff.js",
   "bin": "./dist/lint-diff.js",
