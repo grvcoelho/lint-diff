@@ -34,7 +34,7 @@ filter only the errors introduced in the commit range (and nothing more).
 
   ```sh
   # This will lint the last commit
-  difflint lint --commit-range HEAD^..HEAD
+  difflint lint HEAD^..HEAD
   ```
 
 ## Examples
@@ -42,12 +42,18 @@ filter only the errors introduced in the commit range (and nothing more).
 1. Lint the last 3 commits:
 
   ```sh
-  difflint lint --commit-range HEAD~3..HEAD
+  difflint lint HEAD~3..HEAD
   ```
 
-2. Lint all commits from a build in Travis:
+2. Lint local changes that are not yet commited (similar to what [lint-staged](https://github.com/okonet/lint-staged) do):
+
+  ```sh
+  difflint lint HEAD
+  ```
+
+3. Lint all commits from a build in [Travis](https://travis-ci.org):
 
   ```sh
   # This environment variable will be available in any Travis build
-  difflint lint --commit-range $TRAVIS_COMMIT_RANGE
+  difflint lint $TRAVIS_COMMIT_RANGE
   ```
