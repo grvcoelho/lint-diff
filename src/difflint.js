@@ -3,19 +3,26 @@ import exec from 'execa'
 import path from 'path'
 import { CLIEngine } from 'eslint'
 import {
+  T,
   assoc,
+  cond,
   curry,
+  curryN,
   endsWith,
   evolve,
+  equals,
   filter,
   find,
   map,
   objOf,
   pipe,
   pipeP,
+  pluck,
   prop,
   propEq,
   split,
+  sum,
+  tap,
 } from 'ramda'
 import { getChangedLinesFromDiff } from './lib/git'
 
@@ -70,9 +77,27 @@ const applyLinter = changedFileLineMap => pipe(
   filterLinterMessages(changedFileLineMap)
 )(changedFileLineMap)
 
-const reportResults = pipe(
+const logResults = pipe(
   prop('results'),
-  formatter
+  formatter,
+  console.log
+)
+
+const getErrorCountFromReport = pipe(
+  prop('results'),
+  pluck('errorCount'),
+  sum
+)
+
+const exitProcess = curryN(2, n => process.exit(n))
+
+const reportResults = pipe(
+  tap(logResults),
+  getErrorCountFromReport,
+  cond([
+    [equals(0), exitProcess(0)],
+    [T, exitProcess(1)],
+  ])
 )
 
 const run = commitRange => Promise.resolve(commitRange)
@@ -80,6 +105,5 @@ const run = commitRange => Promise.resolve(commitRange)
   .map(getChangedFileLineMap(commitRange))
   .then(applyLinter)
   .then(reportResults)
-  .tap(console.log)
 
 export default run
