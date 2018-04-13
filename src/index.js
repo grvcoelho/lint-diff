@@ -1,5 +1,5 @@
 import program from 'commander'
-import run from './difflint'
+import run from './lint-diff'
 
 program
   .command('lint <commit-range>')

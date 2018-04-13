@@ -1,6 +1,6 @@
-# difflint
+# lint-diff
 
-[![Build Status](https://travis-ci.org/grvcoelho/difflint.svg?branch=master)](https://travis-ci.org/grvcoelho/difflint)
+[![Build Status](https://travis-ci.org/grvcoelho/lint-diff.svg?branch=master)](https://travis-ci.org/grvcoelho/lint-diff)
 
 :nail_care: Run eslint only in the changed parts of the code
 
@@ -12,7 +12,7 @@ When working with legacy code, we often have to make changes to very large
 files (which would be too troublesome to fix all lint errors)and thus it would
 be good to lint only the lines changed and not the entire file.
 
-[difflint](https://github.com/grvcoelho/difflint) receives a commit range and
+[lint-diff](https://github.com/grvcoelho/lint-diff) receives a commit range and
 uses [ESLint](https://github.com/eslint/eslint)  to lint the changed files and
 filter only the errors introduced in the commit range (and nothing more).
 
@@ -25,7 +25,7 @@ filter only the errors introduced in the commit range (and nothing more).
 1. Install it:
 
   ```sh
-  npm install difflint
+  npm install @grvcoelho/lint-diff
   ```
 
 2. Install `eslint` and add your eslint configuration file.
@@ -34,7 +34,7 @@ filter only the errors introduced in the commit range (and nothing more).
 
   ```sh
   # This will lint the last commit
-  difflint lint HEAD^..HEAD
+  lint-diff lint HEAD^..HEAD
   ```
 
 ## Examples
@@ -42,18 +42,18 @@ filter only the errors introduced in the commit range (and nothing more).
 1. Lint the last 3 commits:
 
   ```sh
-  difflint lint HEAD~3..HEAD
+  lint-diff lint HEAD~3..HEAD
   ```
 
 2. Lint local changes that are not yet commited (similar to what [lint-staged](https://github.com/okonet/lint-staged) do):
 
   ```sh
-  difflint lint HEAD
+  lint-diff lint HEAD
   ```
 
 3. Lint all commits from a build in [Travis](https://travis-ci.org):
 
   ```sh
   # This environment variable will be available in any Travis build
-  difflint lint $TRAVIS_COMMIT_RANGE
+  lint-diff lint $TRAVIS_COMMIT_RANGE
   ```
