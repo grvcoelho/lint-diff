@@ -30,7 +30,7 @@ const linter = new CLIEngine()
 const formatter = linter.getFormatter()
 
 const getChangedFiles = pipeP(
-  commitRange => exec('git', ['diff', commitRange, '--name-only']),
+  commitRange => exec('git', ['diff', commitRange, '--name-only', '--diff-filter=ACM']),
   prop('stdout'),
   split('\n'),
   filter(endsWith('.js')),
