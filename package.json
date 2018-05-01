@@ -41,6 +41,7 @@
     "bluebird": "^3.5.1",
     "commander": "^2.15.1",
     "execa": "^0.10.0",
+    "meow": "^5.0.0",
     "ramda": "^0.25.0"
   },
   "peerDependencies": {
