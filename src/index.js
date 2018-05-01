@@ -1,10 +1,6 @@
 import meow from 'meow'
 import run from './lint-diff'
 
-const debug = () => {
-  console.log('debug')
-}
-
 const cli = meow(`
   Usage
     $ lint-diff [<diff-input>]
