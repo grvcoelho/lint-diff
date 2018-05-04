@@ -25,7 +25,7 @@ filter only the errors introduced in the commit range (and nothing more).
 1. Install it:
 
   ```sh
-  npm install lint-diff
+  $ npm install lint-diff
   ```
 
 2. Install `eslint` and add your eslint configuration file.
@@ -34,7 +34,7 @@ filter only the errors introduced in the commit range (and nothing more).
 
   ```sh
   # This will lint the last commit
-  lint-diff HEAD^..HEAD
+  $ lint-diff HEAD^..HEAD
   ```
 
 ## Examples
@@ -42,18 +42,20 @@ filter only the errors introduced in the commit range (and nothing more).
 1. Lint the last 3 commits:
 
   ```sh
-  lint-diff HEAD~3..HEAD
+  $ lint-diff HEAD~3..HEAD
   ```
 
 2. Lint local changes that are not yet commited (similar to what [lint-staged](https://github.com/okonet/lint-staged) do):
 
   ```sh
-  lint-diff HEAD
+  $ lint-diff HEAD
+  # or
+  $ lint-diff
   ```
 
 3. Lint all commits from a build in [Travis](https://travis-ci.org):
 
   ```sh
   # This environment variable will be available in any Travis build
-  lint-diff $TRAVIS_COMMIT_RANGE
+  $ lint-diff $TRAVIS_COMMIT_RANGE
   ```
