@@ -8,7 +8,7 @@
     "build": "webpack",
     "lint": "eslint 'src/**/*.js'",
     "prepublish": "npm run build",
-    "test": "npm run lint"
+    "test": "echo $TRAVIS_COMMIT_RANGE"
   },
   "repository": {
     "type": "git",
