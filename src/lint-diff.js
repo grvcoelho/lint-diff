@@ -100,7 +100,7 @@ const reportResults = pipe(
   ])
 )
 
-const run = commitRange => Promise.resolve(commitRange)
+const run = (commitRange = 'HEAD') => Promise.resolve(commitRange)
   .then(getChangedFiles)
   .map(getChangedFileLineMap(commitRange))
   .then(applyLinter)
