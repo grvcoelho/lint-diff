@@ -13,7 +13,9 @@ import {
   equals,
   filter,
   find,
+  length,
   map,
+  merge,
   objOf,
   pipe,
   pipeP,
@@ -65,9 +67,28 @@ const filterLinterMessages = changedFileLineMap => (linterOutput) => {
     return filterMessages(result)
   }
 
+  const countBySeverity = severity =>
+    pipe(
+      filter(propEq('severity', severity)),
+      length
+    )
+
+  const countWarningMessages = countBySeverity(1)
+
+  const warningCount = (result) => {
+    const transform = {
+      warningCount: countWarningMessages(result.messages),
+    }
+
+    return merge(result, transform)
+  }
+
   return pipe(
     prop('results'),
-    map(filterMessagesByFile),
+    map(pipe(
+      filterMessagesByFile,
+      warningCount
+    )),
     objOf('results')
   )(linterOutput)
 }
