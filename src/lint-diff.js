@@ -74,6 +74,7 @@ const filterLinterMessages = changedFileLineMap => (linterOutput) => {
     )
 
   const countWarningMessages = countBySeverity(1)
+  const countErrorMessages = countBySeverity(2)
 
   const warningCount = (result) => {
     const transform = {
@@ -83,11 +84,20 @@ const filterLinterMessages = changedFileLineMap => (linterOutput) => {
     return merge(result, transform)
   }
 
+  const errorCount = (result) => {
+    const transform = {
+      errorCount: countErrorMessages(result.messages),
+    }
+
+    return merge(result, transform)
+  }
+
   return pipe(
     prop('results'),
     map(pipe(
       filterMessagesByFile,
-      warningCount
+      warningCount,
+      errorCount
     )),
     objOf('results')
   )(linterOutput)
