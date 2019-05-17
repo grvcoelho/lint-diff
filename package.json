@@ -49,6 +49,6 @@
     "ramda": "^0.26.1"
   },
   "peerDependencies": {
-    "eslint": "4.x"
+    "eslint": ">=4.x"
   }
 }
