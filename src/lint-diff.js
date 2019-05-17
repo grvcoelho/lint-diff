@@ -18,36 +18,44 @@ import {
   merge,
   objOf,
   pipe,
-  pipeP,
+  pipeWith,
   pluck,
   prop,
   propEq,
   split,
   sum,
   tap,
+  then,
 } from 'ramda'
 import { getChangedLinesFromDiff } from './lib/git'
 
 const linter = new CLIEngine()
 const formatter = linter.getFormatter()
 
-const getChangedFiles = pipeP(
-  commitRange => exec('git', ['diff', commitRange, '--name-only', '--diff-filter=ACMR']),
-  prop('stdout'),
-  split('\n'),
-  filter(endsWith('.js')),
-  map(path.resolve)
+
+const getChangedFiles = extensions => pipeWith(
+  then,
+  [
+    commitRange => exec('git', ['diff', commitRange, '--name-only', '--diff-filter=ACMR']),
+    prop('stdout'),
+    split('\n'),
+    filter(file => extensions.split(',').some(ext => endsWith(ext, file))),
+    map(path.resolve)
+  ]
 )
 
 const getDiff = curry((commitRange, filename) =>
   exec('git', ['diff', commitRange, filename])
     .then(prop('stdout')))
 
-const getChangedFileLineMap = curry((commitRange, filePath) => pipeP(
-  getDiff(commitRange),
-  getChangedLinesFromDiff,
-  objOf('changedLines'),
-  assoc('filePath', filePath)
+const getChangedFileLineMap = curry((commitRange, filePath) => pipeWith(
+  then,
+  [
+    getDiff(commitRange),
+    getChangedLinesFromDiff,
+    objOf('changedLines'),
+    assoc('filePath', filePath)
+  ]
 )(filePath))
 
 const lintChangedLines = pipe(
@@ -131,8 +139,8 @@ const reportResults = pipe(
   ])
 )
 
-const run = (commitRange = 'HEAD') => Promise.resolve(commitRange)
-  .then(getChangedFiles)
+const run = (commitRange = 'HEAD', extensions='.js') => Promise.resolve(commitRange)
+  .then(getChangedFiles(extensions))
   .map(getChangedFileLineMap(commitRange))
   .then(applyLinter)
   .then(reportResults)
