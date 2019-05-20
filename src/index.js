@@ -9,9 +9,9 @@ const cli = meow(`
     $ lint-diff HEAD~1..HEAD
     $ lint-diff master..my-branch
 `, {
-  flags: {
-    ext: { type: 'string' },
-  },
-})
+    flags: {
+      ext: { type: 'string' },
+    },
+  })
 
 run(cli.input[0], cli.flags.ext)
