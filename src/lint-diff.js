@@ -32,7 +32,6 @@ import { getChangedLinesFromDiff } from './lib/git'
 const linter = new CLIEngine()
 const formatter = linter.getFormatter()
 
-
 const getChangedFiles = extensions => pipeWith(
   then,
   [
@@ -40,7 +39,7 @@ const getChangedFiles = extensions => pipeWith(
     prop('stdout'),
     split('\n'),
     filter(file => extensions.split(',').some(ext => endsWith(ext, file))),
-    map(path.resolve)
+    map(path.resolve),
   ]
 )
 
@@ -54,7 +53,7 @@ const getChangedFileLineMap = curry((commitRange, filePath) => pipeWith(
     getDiff(commitRange),
     getChangedLinesFromDiff,
     objOf('changedLines'),
-    assoc('filePath', filePath)
+    assoc('filePath', filePath),
   ]
 )(filePath))
 
@@ -139,7 +138,7 @@ const reportResults = pipe(
   ])
 )
 
-const run = (commitRange = 'HEAD', extensions='.js') => Promise.resolve(commitRange)
+const run = (commitRange = 'HEAD', extensions = '.js') => Promise.resolve(commitRange)
   .then(getChangedFiles(extensions))
   .map(getChangedFileLineMap(commitRange))
   .then(applyLinter)
