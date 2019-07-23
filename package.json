@@ -1,6 +1,6 @@
 {
-  "name": "lint-diff",
-  "version": "1.2.0",
+  "name": "@noodoo/lint-diff",
+  "version": "1.2.1",
   "description": ":nail_care: Run eslint only in the changed parts of the code",
   "main": "./dist/lint-diff.js",
   "bin": "./dist/lint-diff.js",
@@ -10,10 +10,7 @@
     "prepublish": "npm run build",
     "test": "npm run lint"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/grvcoelho/lint-diff.git"
-  },
+  "repository": "noodoo/lint-diff",
   "keywords": [
     "linter",
     "eslint",
@@ -22,10 +19,6 @@
   ],
   "author": "Guilherme Coelho <guilhermervcoelho@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/grvcoelho/lint-diff/issues"
-  },
-  "homepage": "https://github.com/grvcoelho/lint-diff#readme",
   "devDependencies": {
     "babel-loader": "^7.1.4",
     "babel-plugin-add-module-exports": "^0.2.1",
