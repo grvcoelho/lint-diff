@@ -19,8 +19,11 @@ const config = {
     rules: [
       {
         test: /\.js$/,
-        use: 'babel-loader',
+        loader: 'babel-loader',
         exclude: /node_modules/,
+        options: {
+          presets: ['@babel/preset-env'],
+        },
       },
     ],
   },
@@ -29,7 +32,7 @@ const config = {
       banner: '#!/usr/bin/env node',
       raw: true,
     }),
-  ]
+  ],
 }
 
 module.exports = config
